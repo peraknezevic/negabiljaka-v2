@@ -1,0 +1,248 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique @map("session_token")
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  Article       Article[]
+
+  @@map("users")
+}
+
+model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verificationtokens")
+}
+
+model Article {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  title        String  @unique
+  slug         String  @unique
+  intro        String?
+  content      String
+  user         User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String? @db.ObjectId
+  imageCredits String
+
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+  language  Language  @default(ENGLISH)
+  published Publish   @default(PUBLISHED)
+}
+
+model Page {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  title   String @unique
+  slug    String @unique
+  content String
+
+  updatedAt DateTime? @updatedAt
+  createdAt DateTime? @default(now())
+  language  Language? @default(ENGLISH)
+  published Publish   @default(PUBLISHED)
+}
+
+model GenusPage {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  title     String  @unique
+  slug      String  @unique
+  intro     String
+  uvod      String?
+  thanks    String?
+  hvala     String?
+  changeLog String
+  promene   String?
+  plants    Plant[]
+
+  updatedAt DateTime? @updatedAt
+  createdAt DateTime? @default(now())
+  published Publish   @default(PUBLISHED)
+}
+
+model Plant {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  slug       String  @unique
+  title      String
+  hasProfile Boolean @default(false)
+
+  isSpecies  Boolean @default(true)
+  isCultivar Boolean @default(false)
+  isHybrid   Boolean @default(false)
+  isUnsorted Boolean @default(false)
+
+  children String?
+  parents  String?
+
+  genusPage     GenusPage @relation(fields: [genusPageSlug], references: [slug])
+  genusPageSlug String
+
+  synonyms     String?
+  tradeNames   String?
+  narodniNaziv String?
+  commonNames  String?
+  namedBy      String?
+  inventor     String?
+  patent       String?
+  nativeArea   String?
+  note         String?
+  beleske      String?
+
+  hasImage          Boolean @default(true)
+  imagesForApproval String?
+  imageCredits      String?
+
+  updatedAt DateTime? @updatedAt
+  createdAt DateTime? @default(now())
+  published Publish   @default(PUBLISHED)
+}
+
+model PlantProfile {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  slug          String @unique
+  title         String
+  botanicalName String @unique
+
+  synonyms        String?
+  namedBy         String?
+  inventor        String?
+  patent          String?
+  tradeNames      String?
+  commonNames     String?
+  narodniNaziv    String? //
+  family          String?
+  subFamily       String?
+  genus           String
+  nativeArea      String?
+  podrucjePorekla String?
+
+  care          Care          @default(EASY)
+  light         Light         @default(BRIGHT_LIGHT)
+  watering      String
+  zalivanje     String
+  soil          String
+  supstrat      String
+  soilPH        String
+  humidity      Humidity      @default(MEDIUM)
+  feeding       String
+  prihrana      String
+  minimalT      Int
+  optimalT      Int
+  speedOfGrowth SpeedOfGrowth @default(MODERATE)
+  matureSize    String
+  velicina      String
+  repotting     String
+  presadjivanje String
+  flower        String
+  cvet          String
+  propagation   String
+  razmnozavanje String
+  toxicity      Toxicity      @default(TOXIC)
+  pests         String
+  stetocine     String
+  diseases      String
+  bolesti       String
+  imageCredits  String
+  notes         String
+  beleske       String
+
+  updatedAt DateTime? @updatedAt
+  createdAt DateTime? @default(now())
+  published Publish   @default(PUBLISHED)
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Language {
+  ENGLISH
+  SRPSKI
+}
+
+enum Care {
+  EASY
+  AVARAGE
+  DIFFICULT
+}
+
+enum Light {
+  LOW_LIGHT
+  PARTIAL_SHADE
+  MEDIUM_LIGHT
+  BRIGHT_LIGHT
+  FULL_SUN
+}
+
+enum Humidity {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum SpeedOfGrowth {
+  SLOW
+  MODERATE
+  FAST
+}
+
+enum Toxicity {
+  TOXIC
+  NOT_TOXIC
+  NO_INFO
+}
+
+enum Publish {
+  PUBLISHED
+  DRAFT
+  REVIEW
+}
