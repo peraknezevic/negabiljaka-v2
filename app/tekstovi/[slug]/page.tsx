@@ -3,7 +3,6 @@ import Markdown from "@/components/ui/markdown"
 import PageHead from "@/components/page-head"
 import Section from "@/components/section"
 import { getArticleBySlug } from "@/lib/data"
-import { getCldOgImageUrl } from "next-cloudinary"
 import { notFound } from "next/navigation"
 
 const Page = async ({ params }: { params: { slug: string } }) => {
@@ -23,10 +22,10 @@ const Page = async ({ params }: { params: { slug: string } }) => {
       <Section>
         <Markdown content={article.content} />
         <Figure
-          imgUrl={`/images/articles/${article.slug}/${article.slug}-1600x900.jpg`}
+          imgUrl={`/images/articles/${article.imageSlug}/${article.imageSlug}-1600x900.jpg`}
           alt={article.title}
           caption={article.title}
-          credit={article.imageCredits || "Photo by Houseplants/xyz"}
+          credit={article.imageCredits || "Slika: Houseplants.xyz"}
         />
       </Section>
     </article>

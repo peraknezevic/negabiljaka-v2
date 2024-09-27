@@ -10,6 +10,7 @@ const Card = ({
     id: string
     slug: string
     title: string
+    imageSlug?: string | null
   }
   imgFolder: string
   pageFolder: string
@@ -18,7 +19,11 @@ const Card = ({
     <li className="h-fit overflow-hidden rounded-xl bg-white text-center shadow-md transition-shadow hover:shadow-xl dark:bg-zinc-900">
       <Link href={`/${pageFolder}/${item.slug}/`}>
         <CldImage
-          src={`/images/${imgFolder}/${item.slug}/${item.slug}.jpg`}
+          src={
+            item.imageSlug
+              ? `/images/${imgFolder}/${item.imageSlug}/${item.imageSlug}.jpg`
+              : `/images/${imgFolder}/${item.slug}/${item.slug}.jpg`
+          }
           width={400}
           height={500}
           alt={item.title}

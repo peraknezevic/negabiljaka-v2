@@ -13,7 +13,7 @@ const HomePageBlock = ({
 }: {
   title: string
   link: string
-  data: { id: string; title: string; slug: string }[]
+  data: { id: string; title: string; slug: string; imageSlug?: string | null }[]
   imgFolder: string
   pageFolder: string
   linkTitle: string

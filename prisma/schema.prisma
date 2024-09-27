@@ -71,6 +71,7 @@ model Article {
   content      String
   user         User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String? @db.ObjectId
+  imageSlug    String?
   imageCredits String
 
   createdAt DateTime? @default(now())

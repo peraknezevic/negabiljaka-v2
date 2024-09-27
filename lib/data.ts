@@ -109,6 +109,7 @@ const getLatestArticles = async () =>
       id: true,
       title: true,
       slug: true,
+      imageSlug: true,
     },
     take: 3,
   })
@@ -129,6 +130,7 @@ export const getPublishedArticles = async () =>
       id: true,
       title: true,
       slug: true,
+      imageSlug: true,
     },
   })
 
