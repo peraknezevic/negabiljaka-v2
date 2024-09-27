@@ -31,7 +31,7 @@ const Footer = () => {
       <p className="mx-auto text-center">
         &copy; 2021.-2024. Dizajnirao i razvio{" "}
         <a href="https://peraknezevic.com">Pera Knezevic</a>. Sva prava
-        zadržana.
+        zadržana. v2 beta
       </p>
     </footer>
   )
