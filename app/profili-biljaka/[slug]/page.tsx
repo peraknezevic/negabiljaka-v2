@@ -2,8 +2,13 @@ import PageHead from "@/components/page-head"
 import PlantProfileContent from "@/components/plant-profile-content"
 import { getPlantProfileBySlug } from "@/lib/data"
 
-const Page = async ({ params }: { params: { slug: string } }) => {
-  const plantProfile = await getPlantProfileBySlug(params.slug)
+type Params = { slug: string }
+
+type Props = { params?: Promise<Params> }
+
+const Page = async ({ params }: Props) => {
+  const { slug } = await (params as Promise<Params>)
+  const plantProfile = await getPlantProfileBySlug(slug)
 
   if (!plantProfile) return <p>Još uvek nemamo profil za ovu biljku.</p>
   if (plantProfile.published === "DRAFT")

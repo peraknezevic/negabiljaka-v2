@@ -3,8 +3,13 @@ import PlantCardSingle from "@/components/plant-card-single"
 import ScrollTopFix from "@/components/scroll-fix"
 import { getPlantBySlug } from "@/lib/data"
 
-const Pages = async ({ params }: { params: { slug: string } }) => {
-  const plant = await getPlantBySlug(params.slug)
+type Params = { slug: string }
+
+type Props = { params?: Promise<Params> }
+
+const Pages = async ({ params }: Props) => {
+  const { slug } = await (params as Promise<Params>)
+  const plant = await getPlantBySlug(slug)
 
   if (!plant) return <p>Još uvek nemamo stranicu za ovu biljku.</p>
 

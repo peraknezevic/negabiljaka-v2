@@ -7,8 +7,13 @@ import Section from "@/components/section"
 import { getCldOgImageUrl } from "next-cloudinary"
 import { getGenusPageData } from "@/lib/data"
 
-const Page = async ({ params }: { params: { slug: string } }) => {
-  const [genusPage, plants] = await getGenusPageData(params.slug)
+type Params = { slug: string }
+
+type Props = { params?: Promise<Params> }
+
+const Page = async ({ params }: Props) => {
+  const { slug } = await (params as Promise<Params>)
+  const [genusPage, plants] = await getGenusPageData(slug)
 
   if (!genusPage) return <p>Rod nije pronađen.</p>
   if (genusPage.published === "DRAFT")
@@ -31,7 +36,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
 
       <H2 title={`${genusPage.title} biljke`} />
       {plants.map((plant) => (
-        <PlantCard plant={plant} genusSlug={params.slug} key={plant.slug} />
+        <PlantCard plant={plant} genusSlug={slug} key={plant.slug} />
       ))}
 
       {genusPage.hvala && (
@@ -52,12 +57,13 @@ const Page = async ({ params }: { params: { slug: string } }) => {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }
+  params?: Promise<Params>
 }) {
-  const publicId = `images/genus/${params.slug}/genus-${params.slug}-og-en.jpg`
+  const { slug } = await (params as Promise<Params>)
+  const publicId = `images/genus/${slug}/genus-${slug}-og-en.jpg`
   const url = "https://negabiljaka.com"
-  const pageUrl = `${url}/rodovi-biljaka/${params.slug}`
-  const pageTitle = params.slug[0].toUpperCase() + params.slug.slice(1)
+  const pageUrl = `${url}/rodovi-biljaka/${slug}`
+  const pageTitle = slug[0].toUpperCase() + slug.slice(1)
   const title = `${pageTitle} vrste, kultivari i hibridi - rod ${pageTitle}`
   const description = `Lista svih ${pageTitle} biljaka`
   const keywords = `${pageTitle}, ${pageTitle} vrste, ${pageTitle} kultivari, ${pageTitle} hibridi`
