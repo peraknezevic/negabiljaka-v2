@@ -20,7 +20,7 @@
     "react-dom": "^19.2.1",
     "react-markdown": "^10.1.0",
     "tailwind-merge": "^3.0.2",
-    "zod": "^3.24.2"
+    "zod": "^3.25"
   },
   "devDependencies": {
     "@types/node": "^22.13.13",
