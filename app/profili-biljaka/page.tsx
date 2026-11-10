@@ -25,8 +25,8 @@ const Page = async () => {
 }
 
 export const metadata: Metadata = {
-  title: "Plant Profiles - Houseplants",
-  description: "Care guides for your indoor plants",
+  title: "Profili biljaka - Nega Biljaka",
+  description: "Vodiči za negu sobnih biljaka",
 }
 
 export default Page

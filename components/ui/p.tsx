@@ -18,14 +18,20 @@ const P = ({
       {content && content}
       {list &&
         list.split(", ").map((parent, i) => (
-          <span key="child">
+          <span key={i}>
             {i > 0 && ", "}
             {external ? (
-              <Link href={removeChars(parent)}>
+              <Link
+                href={removeChars(parent)}
+                className="underline underline-offset-4"
+              >
                 {parent.replaceAll('"', "")}
               </Link>
             ) : (
-              <a key={parent} href={"#" + removeChars(parent)}>
+              <a
+                href={"#" + removeChars(parent)}
+                className="underline underline-offset-4"
+              >
                 {parent.replaceAll('"', "")}
               </a>
             )}

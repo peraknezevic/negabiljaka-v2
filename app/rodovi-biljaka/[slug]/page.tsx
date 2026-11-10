@@ -130,7 +130,7 @@ export async function generateMetadata({
       ],
       type: "article",
       authors: ["Pera Knezevic / Nega Biljaka"],
-      locale: "en_US",
+      locale: "sr_RS",
     },
   }
 }

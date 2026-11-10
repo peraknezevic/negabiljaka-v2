@@ -9,28 +9,41 @@ const Footer = () => {
         <ul className="flex justify-between gap-x-8">
           {socialNavItems.map((item) => (
             <li key={item.id}>
-              <a href={item.url} className="underline">
+              <a href={item.url} className="underline underline-offset-4">
                 {item.title}
               </a>
             </li>
           ))}
         </ul>
       </div>
-      <nav>
+      <nav aria-label="Podnožje">
         <ul className="flex gap-4 md:gap-8">
           <li>
-            <Link href="/stranice/politika-privatnosti">
+            <Link
+              href="/stranice/politika-privatnosti"
+              className="underline underline-offset-4"
+            >
               Politika privatnosti
             </Link>
           </li>
           <li>
-            <a href="mailto:negabiljaka@gmail.com">Kontakt preko e-maila</a>
+            <a
+              href="mailto:negabiljaka@gmail.com"
+              className="underline underline-offset-4"
+            >
+              Kontakt preko e-maila
+            </a>
           </li>
         </ul>
       </nav>
       <p className="mx-auto text-center">
         &copy; 2021.-2024. Dizajnirao i razvio{" "}
-        <a href="https://peraknezevic.com">Pera Knezevic</a>. Sva prava
+        <a
+          href="https://peraknezevic.com"
+          className="underline underline-offset-4"
+        >
+          Pera Knezevic
+        </a>. Sva prava
         zadržana. v2 beta
       </p>
     </footer>

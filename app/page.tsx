@@ -5,6 +5,8 @@ const [plants, genera, articles] = await getHomePageData()
 const Home = () => {
   return (
     <>
+      {/* Logo nije naslov, pa stranica dobija h1 vidljiv samo čitačima ekrana. */}
+      <h1 className="sr-only">Nega Biljaka: profili i saveti za negu sobnih biljaka</h1>
       <HomePageBlock
         title="Ažurirane stranice rodova biljaka"
         data={genera}

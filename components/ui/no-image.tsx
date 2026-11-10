@@ -6,8 +6,11 @@ const NoImage = ({ title }: { title: string }) => {
       </p>
       <p>
         Pošaljite mejlom na{" "}
-        <a href={`mailto:negabiljaka@gmail.com?subject=${title} slika`}>
-          negabiljaka@gmail.com{" "}
+        <a
+          href={`mailto:negabiljaka@gmail.com?subject=${title} slika`}
+          className="underline underline-offset-4"
+        >
+          negabiljaka@gmail.com
         </a>{" "}
         ili preko instagrama @negabiljaka.xyz
       </p>

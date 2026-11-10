@@ -31,12 +31,22 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${zillaSlab.variable}`}>
+    <html lang="sr-Latn" className={`${outfit.variable} ${zillaSlab.variable}`}>
       <body className="bg-pink-50 text-emerald-950 dark:bg-emerald-950 dark:text-zinc-300">
+        <a
+          href="#sadrzaj"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-emerald-950 focus:shadow-lg"
+        >
+          Preskoči na sadržaj
+        </a>
         <Header />
-        <div className="mx-auto my-8 min-h-screen max-w-4xl md:py-16">
+        <main
+          id="sadrzaj"
+          tabIndex={-1}
+          className="mx-auto my-8 min-h-screen max-w-4xl focus:outline-none md:py-16"
+        >
           {children}
-        </div>
+        </main>
         <Footer />
       </body>
     </html>

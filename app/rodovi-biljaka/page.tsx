@@ -9,7 +9,7 @@ const Page = async () => {
 
   return (
     <div>
-      <PageHead title="Genera Pages" />
+      <PageHead title="Rodovi biljaka" />
       <CardGrid>
         {data.map((item) => (
           <Card

@@ -30,7 +30,7 @@ const PlantProfileContent = ({ plant }: { plant: PlantProfile }) => {
           imgUrl={`/images/plants/${plant.slug}/${plant.slug}-01.jpg`}
           alt={plant.title}
           caption={plant.botanicalName}
-          credit={plant.imageCredits || "Photo by Nega Biljaka"}
+          credit={plant.imageCredits || "Foto: Nega Biljaka"}
         />
       </Section>
 
@@ -56,7 +56,7 @@ const PlantProfileContent = ({ plant }: { plant: PlantProfile }) => {
           imgUrl={`/images/plants/${plant.slug}/${plant.slug}-02.jpg`}
           alt={plant.title}
           caption={plant.botanicalName}
-          credit={plant.imageCredits || "Photo by Nega Biljaka"}
+          credit={plant.imageCredits || "Foto: Nega Biljaka"}
         />
       </Section>
 
@@ -72,7 +72,7 @@ const PlantProfileContent = ({ plant }: { plant: PlantProfile }) => {
           imgUrl={`/images/plants/${plant.slug}/${plant.slug}-03.jpg`}
           alt={plant.title}
           caption={plant.botanicalName}
-          credit={plant.imageCredits || "Photo by Nega Biljaka"}
+          credit={plant.imageCredits || "Foto: Nega Biljaka"}
         />
       </Section>
 

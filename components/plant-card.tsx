@@ -32,7 +32,7 @@ const PlantCard = ({
       {plant.nativeArea && (
         <P title="Prirodno stanište" content={plant.nativeArea} />
       )}
-      {plant.beleske && <P title="*" content={plant.beleske} />}
+      {plant.beleske && <P title="Napomena" content={plant.beleske} />}
 
       {plant.parents && <P title="Roditelj(i)" list={plant.parents} />}
       {plant.children && (
@@ -44,7 +44,7 @@ const PlantCard = ({
           imgUrl={`/images/genus/${genusSlug}/${plant.slug}.jpg`}
           alt={plant.title}
           caption={plant.title}
-          credit={plant.imageCredits || "Photo by Houseplants.xyz"}
+          credit={plant.imageCredits || "Foto: Houseplants.xyz"}
         />
       ) : (
         <NoImage title={plant.title} />
